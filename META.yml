@@ -1,0 +1,20 @@
+---
+name: Test-TAP-XML
+version: 0.01
+author:
+  - Michael Peters <mpeters@plusthree.com>
+abstract: Output test results as XML
+license: perl
+resources:
+  license: http://dev.perl.org/licenses/
+build_requires:
+  Test::LongString: 0
+  Test::More: 0
+  Test::TAP::Model: 0.04
+  Test::XML: 0
+  XML::Simple: 0
+provides:
+  Test::TAP::XML:
+    file: lib/Test/TAP/XML.pm
+    version: 0.01
+generated_by: Module::Build version 0.2703

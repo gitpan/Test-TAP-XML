@@ -1,0 +1,75 @@
+NAME
+    Test::TAP::XML - Output test results as XML
+
+VERSION
+    Version 0.01
+
+SYNOPSIS
+        use Test::TAP::XML
+
+        my $t = Test::TAP::XML->new();
+
+        $t->run_tests(qw( t/foo.t t/bar.t );
+
+        print $t->xml;
+
+DESCRIPTION
+    Test::TAP::XML is a subclass of Test::TAP::Model (which in turn is a
+    subclass of Test::Harness::Straps). This means it is trivial to add XML
+    output support to an existing test harness based on Test::Harness.
+
+OBJECT METHODS
+    All of the Test::TAP::Model methods are avaialable along with the
+    following methods:
+
+  xml
+
+    This method will return the XML text that contains the information
+    output by the tests.
+
+        my $xml = $t->xml;
+
+CLASS METHODS
+  from_xml
+
+    This method will create a new Test::TAP::XML object from a string (a
+    scalar or a scalar ref) containing XML.
+
+        my $tap_model = Test::TAP::XML->from_xml($xml);
+
+AUTHOR
+    Michael Peters, `<mpeters at plusthree.com>'
+
+BUGS
+    Please report any bugs or feature requests to `bug-test-tap-xml at
+    rt.cpan.org', or through the web interface at
+    http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Test-TAP-XML. I will be
+    notified, and then you'll automatically be notified of progress on your
+    bug as I make changes.
+
+SUPPORT
+    You can find documentation for this module with the perldoc command.
+
+        perldoc Test::TAP::XML
+
+    You can also look for information at:
+
+    * AnnoCPAN: Annotated CPAN documentation
+        http://annocpan.org/dist/Test-TAP-XML
+
+    * CPAN Ratings
+        http://cpanratings.perl.org/d/Test-TAP-XML
+
+    * RT: CPAN's request tracker
+        http://rt.cpan.org/NoAuth/Bugs.html?Dist=Test-TAP-XML
+
+    * Search CPAN
+        http://search.cpan.org/dist/Test-TAP-XML
+
+ACKNOWLEDGEMENTS
+COPYRIGHT & LICENSE
+    Copyright 2006 Michael Peters, all rights reserved.
+
+    This program is free software; you can redistribute it and/or modify it
+    under the same terms as Perl itself.
+
