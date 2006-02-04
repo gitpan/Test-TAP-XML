@@ -1,9 +1,10 @@
 use Test::More;
 use Test::LongString;
 use Test::XML;
-plan('no_plan');
+plan(tests => 50);
 use_ok("Test::TAP::XML");
 use Test::TAP::Model;
+use File::Temp;
 
 # run some of the other tests
 my @tests = qw(t/pod.t t/pod-coverage.t); 
@@ -29,7 +30,20 @@ contains_string($xml, '<wait>0</wait>');
 
 # now read that XML and create another model obj
 my $model2 = Test::TAP::XML->from_xml($xml);
-# now compare them
+isa_ok($model2, 'Test::TAP::XML');
+
+# now create another model from reading the file
+my $tmp = File::Temp->new(
+    UNLINK  => 1,
+    SUFFIX  => '.xml',
+);
+print $tmp $xml or die "Could not print XML to file '$tmp'! $!";
+close $tmp;
+my $model3 = Test::TAP::XML->from_xml_file($tmp->filename);
+isa_ok($model3, 'Test::TAP::XML');
+
+
+# now compare them to the original
 my @methods = qw( 
     ok passing passed nok failed 
     failing total_ok total_passed 
@@ -38,7 +52,10 @@ my @methods = qw(
     total_todo total_unexpectedly_succeeded ratio
 );
 foreach my $method (@methods) {
-    is($model->$method, $model2->$method, "$method returns the same");
+    foreach my $other_model ($model2, $model3) {
+        is($model->$method, $other_model->$method, "$method returns the same");
+    }
 }
+
 
 

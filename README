@@ -2,7 +2,7 @@ NAME
     Test::TAP::XML - Output test results as XML
 
 VERSION
-    Version 0.01
+    Version 0.02
 
 SYNOPSIS
         use Test::TAP::XML
@@ -36,6 +36,15 @@ CLASS METHODS
     scalar or a scalar ref) containing XML.
 
         my $tap_model = Test::TAP::XML->from_xml($xml);
+
+  from_xml_file
+
+    This method will create a new Test::TAP::XML object from a file (name or
+    file handle) that contains XML.
+
+        my $tap_model = Test::TAP::XML->from_xml_file($FH);
+        # or 
+        my $tap_model = Test::TAP::XML->from_xml_file('/tmp/file.xml');
 
 AUTHOR
     Michael Peters, `<mpeters at plusthree.com>'

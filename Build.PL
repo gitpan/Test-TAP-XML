@@ -7,10 +7,12 @@ my $builder = Module::Build->new(
     license             => 'perl',
     dist_author         => 'Michael Peters <mpeters@plusthree.com>',
     dist_version_from   => 'lib/Test/TAP/XML.pm',
-    build_requires => {
-        'Test::More'        => 0,
+    requires            => {
         'Test::TAP::Model'  => 0.04,
         'XML::Simple'       => 0,
+    },
+    build_requires => {
+        'Test::More'        => 0,
         'Test::LongString'  => 0,
         'Test::XML'         => 0,
     },

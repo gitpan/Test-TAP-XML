@@ -1,6 +1,7 @@
 package Test::TAP::XML;
 use base 'Test::TAP::Model';
 use XML::Simple qw(:strict);
+use Carp qw(croak);
 
 use warnings;
 use strict;
@@ -11,11 +12,11 @@ Test::TAP::XML - Output test results as XML
 
 =head1 VERSION
 
-Version 0.01
+Version 0.02
 
 =cut
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 =head1 SYNOPSIS
 
@@ -112,6 +113,36 @@ sub from_xml {
     my $tap_model = $class->new_with_struct($struct);
     return $tap_model;
 }
+
+=head2 from_xml_file
+
+This method will create a new Test::TAP::XML object from a file (name or file handle)
+that contains XML.
+
+    my $tap_model = Test::TAP::XML->from_xml_file($FH);
+    # or 
+    my $tap_model = Test::TAP::XML->from_xml_file('/tmp/file.xml');
+
+=cut
+
+sub from_xml_file {
+    my $class = shift;
+    my $fh;
+    # assume if it's a reference, then we can treat it like a FH
+    if(ref $_[0] ) {
+        $fh = shift;
+    } else {
+        my $filename = shift;
+        open($fh, $filename) or croak "Could not open file '$filename' for reading! $!";
+    }
+    my $xml;
+    {
+        local $/;
+        $xml = <$fh>;
+    }
+    return $class->from_xml(\$xml);
+}
+    
 
 sub _is_empty_hash {
     my ($thing) = @_;
