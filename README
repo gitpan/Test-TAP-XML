@@ -2,7 +2,7 @@ NAME
     Test::TAP::XML - Output test results as XML
 
 VERSION
-    Version 0.02
+    Version 0.03
 
 SYNOPSIS
         use Test::TAP::XML
@@ -23,7 +23,6 @@ OBJECT METHODS
     following methods:
 
   xml
-
     This method will return the XML text that contains the information
     output by the tests.
 
@@ -31,14 +30,12 @@ OBJECT METHODS
 
 CLASS METHODS
   from_xml
-
     This method will create a new Test::TAP::XML object from a string (a
     scalar or a scalar ref) containing XML.
 
         my $tap_model = Test::TAP::XML->from_xml($xml);
 
   from_xml_file
-
     This method will create a new Test::TAP::XML object from a file (name or
     file handle) that contains XML.
 
@@ -47,12 +44,12 @@ CLASS METHODS
         my $tap_model = Test::TAP::XML->from_xml_file('/tmp/file.xml');
 
 AUTHOR
-    Michael Peters, `<mpeters at plusthree.com>'
+    Michael Peters, "<mpeters at plusthree.com>"
 
 BUGS
-    Please report any bugs or feature requests to `bug-test-tap-xml at
-    rt.cpan.org', or through the web interface at
-    http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Test-TAP-XML. I will be
+    Please report any bugs or feature requests to "bug-test-tap-xml at
+    rt.cpan.org", or through the web interface at
+    <http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Test-TAP-XML>. I will be
     notified, and then you'll automatically be notified of progress on your
     bug as I make changes.
 
@@ -64,16 +61,16 @@ SUPPORT
     You can also look for information at:
 
     * AnnoCPAN: Annotated CPAN documentation
-        http://annocpan.org/dist/Test-TAP-XML
+        <http://annocpan.org/dist/Test-TAP-XML>
 
     * CPAN Ratings
-        http://cpanratings.perl.org/d/Test-TAP-XML
+        <http://cpanratings.perl.org/d/Test-TAP-XML>
 
     * RT: CPAN's request tracker
-        http://rt.cpan.org/NoAuth/Bugs.html?Dist=Test-TAP-XML
+        <http://rt.cpan.org/NoAuth/Bugs.html?Dist=Test-TAP-XML>
 
     * Search CPAN
-        http://search.cpan.org/dist/Test-TAP-XML
+        <http://search.cpan.org/dist/Test-TAP-XML>
 
 ACKNOWLEDGEMENTS
 COPYRIGHT & LICENSE

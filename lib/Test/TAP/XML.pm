@@ -2,6 +2,7 @@ package Test::TAP::XML;
 use base 'Test::TAP::Model';
 use XML::Simple qw(:strict);
 use Carp qw(croak);
+use IO::File;
 
 use warnings;
 use strict;
@@ -12,11 +13,11 @@ Test::TAP::XML - Output test results as XML
 
 =head1 VERSION
 
-Version 0.02
+Version 0.03
 
 =cut
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 =head1 SYNOPSIS
 
@@ -98,6 +99,12 @@ sub from_xml {
         ? XMLin($$xml, %IN_options)
         : XMLin($xml,  %IN_options);
 
+    return $class->_get_model_from_struct($struct);
+}
+
+sub _get_model_from_struct {
+    my ($class, $struct) = @_;
+
     # rename 'event' to 'events'
     foreach my $file ( @{$struct->{test_files}} ) {
         $file->{events} = delete $file->{event};
@@ -126,21 +133,26 @@ that contains XML.
 =cut
 
 sub from_xml_file {
-    my $class = shift;
-    my $fh;
+    my ($class, $file) = @_;
+    my $filename;
     # assume if it's a reference, then we can treat it like a FH
-    if(ref $_[0] ) {
-        $fh = shift;
+    if(ref $file ) {
+        # turn it into an IO::File object
+        # XXX - there's probably a better way to do it than this
+        my $tmp = new File::Temp(UNLINK => 0);
+        my $buffer;
+        while(read($file, $buffer, 10240)) {
+            print $tmp $buffer or die "Could not print to $tmp: $!";
+        }
+        close $file;
+        $filename = $tmp->filename;
+        close $tmp;
     } else {
-        my $filename = shift;
-        open($fh, $filename) or croak "Could not open file '$filename' for reading! $!";
+        $filename = $file;
     }
-    my $xml;
-    {
-        local $/;
-        $xml = <$fh>;
-    }
-    return $class->from_xml(\$xml);
+    my $io = IO::File->new($filename) 
+        or croak "Could not open file '$filename' for reading! $!";
+    return $class->_get_model_from_struct(XMLin($io, %IN_options));
 }
     
 

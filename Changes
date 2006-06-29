@@ -1,5 +1,10 @@
 Revision history for Test-TAP-XML
 
+0.03
+        June 29, 2006
+        + using IO::File to pass info to XML::Simple instead of xml
+          for better memory use
+
 0.02
         Feb 04, 2006
         + added from_xml_file() method

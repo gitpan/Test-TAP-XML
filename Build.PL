@@ -8,8 +8,10 @@ my $builder = Module::Build->new(
     dist_author         => 'Michael Peters <mpeters@plusthree.com>',
     dist_version_from   => 'lib/Test/TAP/XML.pm',
     requires            => {
-        'Test::TAP::Model'  => 0.04,
-        'XML::Simple'       => 0,
+        'Test::TAP::Model'    => 0.04,
+        'XML::Simple'         => 0,
+        'Test::Pod'           => 0,
+        'Test::Pod::Coverage' => 0,
     },
     build_requires => {
         'Test::More'        => 0,
